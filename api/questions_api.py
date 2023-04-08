@@ -5,6 +5,7 @@ from api.client import Client
 class Api(Client):
     USERS = '/users'
     BASE_URL = 'https://reqres.in/api'
+    #SIGN_UP = '/register'
 
     def list_users(self):
        """
@@ -56,6 +57,44 @@ class Api(Client):
         }
         return self.post(url, headers, payload)
 
+    def create_user(self, email: str, password: str):
+        """
+        :method: post
+        :rout: /api/register
+        :status: 200
+        :body: {
+                    "email": "",
+                    "password": ""
+                }
+        """
+        url = self.BASE_URL + '/register'
+        payload = json.dumps({
+            "email": F"{email}",
+            "password": F"{password}"
+        })
+        headers = {
+                'Content-Type': 'application/json'
+        }
+        return self.post(url, headers, payload)
+
+    def create_user_neg(self, email: str, password: str):
+        """
+        :method: post
+        :rout: /api/reqister
+        :status: 400
+        :body: {
+                    "email": "",
+                    "error": "Missing password"
+                }
+        """
+        url = self.BASE_URL + '/register'
+        payload = json.dumps({
+            "email": F"{email}",
+        })
+        headers = {
+                'Content-Type': 'application/json'
+        }
+        return self.post(url, headers, payload)
 
     def delete_user(self, id: int):
         """
