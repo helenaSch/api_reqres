@@ -14,7 +14,7 @@ def test_sign_up():
 def test_sign_up_neg():
     email = "eve.holt@reqres.in"
     password = ""
-    res = api.create_user_neg(email, password)
+    res = api.create_user(email, password)
     res_body = res.json()
 
 
